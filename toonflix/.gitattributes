@@ -1,3 +1,3 @@
-*.C++ linguist-vendored
-*.CMake linguist-vendored
-*.Dart linguist-vendored=false
+*.c++ linguist-vendored
+*.cmake linguist-vendored
+*.dart linguist-vendored=false
