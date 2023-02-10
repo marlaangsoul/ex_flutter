@@ -1,5 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:toonflix/widgets/button.dart';
+
+// 파란 줄이 생기는 이유.
+// const testAmount = 15;
+// const priceAmount = 30;
+// var finalPrice = testAmount + priceAmount;
+// 다트 프로그램은 컴파일 전 미리 알고 있는 변수는 처음부터 최적화 시켜서 계산한다.
+// 예를 들면 위의 마지막 fincalPrice의 식을 15 + 30 으로 생각하고 시작한다.
+// 그래서 openUserSetting.json에서 한가지를 수정해준다.
+// const를 일괄 설정 하는 방법.
+// vsCode settings.json 에서
+// "editor.codeActionsOnSave": {
+//         "source.fixAll": true
+//     }
+// }, 이거를 붙이면 된다.
 
 class Player {
   String name; // = 'bh'; 기본값 형태는 자주 사용 되지 않는다.
@@ -13,7 +27,7 @@ class Player {
 void main() {
   var bh = Player(name: "bh");
 
-  runApp(App()); // 다트는 클래스를 만들때마다 new를 써줄 필요가 없다. (new를 쓰나 안쓰나 똑같다. )
+  runApp(const App()); // 다트는 클래스를 만들때마다 new를 써줄 필요가 없다. (new를 쓰나 안쓰나 똑같다. )
   // 모든 화면과 버튼 등의 모든 것들이 APP Widget으로 부터 생성 된다.
   // 우리앱의 root widget이 App이 되는 것이다.
   // root는 어떤 결정을 해야한다.
@@ -21,6 +35,8 @@ void main() {
 }
 
 class App extends StatelessWidget {
+  const App({super.key});
+
   // StatelessWidget 화면에 위젯을 띄우는 것  말고는 큰 의미는 없음.
   @override // 상속 받는 것, StatelessWidget의 build 속 성관련 상속
   Widget build(BuildContext context) {
@@ -29,40 +45,86 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF181818),
+        backgroundColor: const Color(0xFF181818),
         body: Padding(
           // padding: EdgeInsets.all(10),
-          padding: EdgeInsets.symmetric(horizontal: 40),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
+                // 간격을 주기 위해서 사용. (Size가 있는 박스를 만들어 줄뿐. )
                 height: 80,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end, // 우측 정렬
+                // Column의 MainAxis는 가로 방향이고, Row의 MainAxis는 세로 방향이다.
+                // Row의 CrossAxis는 세로 방향이고, Column의 CrossAxis는 가로 방향.
                 children: [
                   Column(
+                    // 서로 위 아래로 배치하려면 Column, 서로 좌우로 배치하려면 Row
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'Hey, Bo',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 38,
+                          fontSize: 30,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                       Text(
                         'Welcome back',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 15,
                           color: Colors.white.withOpacity(0.7),
                         ),
                       ),
                     ],
                   )
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 120,
+              ),
+              Text(
+                'Total Balance',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white.withOpacity(0.8),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                '\$5 194 482', // $는 변수 표현. 이럴때는 \를 앞에 붙이면 된다.
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 44,
+                  color: Colors.white.withOpacity(0.8),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Button(
+                    text: 'Transfer',
+                    bgColor: Color(0xFFF1B33B),
+                    textColor: Colors.black,
+                  ),
+                  Button(
+                    text: 'Requst',
+                    bgColor: Color(0xFF1F2123),
+                    textColor: Colors.white,
+                  ),
+                ],
+              ),
             ],
           ),
         ),
