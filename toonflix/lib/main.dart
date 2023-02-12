@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toonflix/widgets/button.dart';
+import 'package:toonflix/widgets/currency_card.dart';
 
 // 파란 줄이 생기는 이유.
 // const testAmount = 15;
@@ -46,86 +47,157 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: const Color(0xFF181818),
-        body: Padding(
-          // padding: EdgeInsets.all(10),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                // 간격을 주기 위해서 사용. (Size가 있는 박스를 만들어 줄뿐. )
-                height: 80,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end, // 우측 정렬
-                // Column의 MainAxis는 가로 방향이고, Row의 MainAxis는 세로 방향이다.
-                // Row의 CrossAxis는 세로 방향이고, Column의 CrossAxis는 가로 방향.
-                children: [
-                  Column(
-                    // 서로 위 아래로 배치하려면 Column, 서로 좌우로 배치하려면 Row
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'Hey, Bo',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      Text(
-                        'Welcome back',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white.withOpacity(0.7),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 120,
-              ),
-              Text(
-                'Total Balance',
-                style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.white.withOpacity(0.8),
+        body: SingleChildScrollView(
+          // 앱을 스크롤 할수 있게 해준다.
+          child: Padding(
+            // padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  // 간격을 주기 위해서 사용. (Size가 있는 박스를 만들어 줄뿐. )
+                  height: 80,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                '\$5 194 482', // $는 변수 표현. 이럴때는 \를 앞에 붙이면 된다.
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 44,
-                  color: Colors.white.withOpacity(0.8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end, // 우측 정렬
+                  // Column의 MainAxis는 가로 방향이고, Row의 MainAxis는 세로 방향이다.
+                  // Row의 CrossAxis는 세로 방향이고, Column의 CrossAxis는 가로 방향.
+                  children: [
+                    Column(
+                      // 서로 위 아래로 배치하려면 Column, 서로 좌우로 배치하려면 Row
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text(
+                          'Hey, Bo',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Text(
+                          'Welcome back',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white.withOpacity(0.7),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Button(
-                    text: 'Transfer',
-                    bgColor: Color(0xFFF1B33B),
-                    textColor: Colors.black,
+                const SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  'Total Balance',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white.withOpacity(0.8),
                   ),
-                  Button(
-                    text: 'Requst',
-                    bgColor: Color(0xFF1F2123),
-                    textColor: Colors.white,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  '\$5 194 482', // $는 변수 표현. 이럴때는 \를 앞에 붙이면 된다.
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 44,
+                    color: Colors.white.withOpacity(0.8),
                   ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Button(
+                      text: 'Transfer',
+                      bgColor: Color(0xFFF1B33B),
+                      textColor: Colors.black,
+                    ),
+                    Button(
+                      text: 'Requst',
+                      bgColor: Color(0xFF1F2123),
+                      textColor: Colors.white,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end, // View를 하단에 위치
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      'Wallets',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      'View',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const CurrencyCard(
+                  name: 'Euro',
+                  code: 'EUR',
+                  amount: '6 428',
+                  icon: Icons.euro_rounded,
+                  isInverted: false,
+                  order: 0,
+                ),
+                const CurrencyCard(
+                  name: 'Bitcoin',
+                  code: 'BTC',
+                  amount: '2 238',
+                  icon: Icons.currency_bitcoin,
+                  isInverted: true,
+                  order: 1,
+                ),
+                const CurrencyCard(
+                  name: 'Won',
+                  code: 'won',
+                  amount: '40 334',
+                  icon: Icons.work_rounded,
+                  isInverted: false,
+                  order: 2,
+                ),
+                const CurrencyCard(
+                  name: 'owi',
+                  code: 'sod',
+                  amount: '3 121',
+                  icon: Icons.keyboard_hide_sharp,
+                  isInverted: true,
+                  order: 4,
+                ),
+                const CurrencyCard(
+                  name: 'aas',
+                  code: 'aos',
+                  amount: '32 11',
+                  icon: Icons.zoom_in_map_outlined,
+                  isInverted: false,
+                  order: 5,
+                ),
+              ],
+            ),
           ),
         ),
       ),
